@@ -1,0 +1,25 @@
+# Secrets — never, under any name
+.env
+.env.*
+*.pem
+*.key
+*.jks
+*.keystore
+*-keypair.json
+id.json
+
+# Node
+node_modules/
+dist/
+coverage/
+
+# Dart / Flutter
+.dart_tool/
+build/
+.packages
+
+# Editors & OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
