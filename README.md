@@ -6,8 +6,10 @@ Apache-2.0 · built on the [Solana Attestation Service](https://attest.solana.co
 
 > **Status: early.** The proof format below is the working specification.
 > Schemas are being deployed on devnet; the TypeScript SDK and a Flutter plugin
-> follow. Everything in this repository is subject to change until the first
-> tagged release — the roadmap lives in the issues.
+> follow. The wallet signing path is validated on real hardware (Phantom and
+> Solflare, via Mobile Wallet Adapter, on devnet). Everything in this repository
+> is subject to change until the first tagged release — the roadmap lives in
+> the issues.
 
 ---
 
@@ -151,7 +153,9 @@ rather than rebuild one.
 
 **Seed Vault.** Hardware-backed signing on the phone is a Solana Mobile
 primitive. A countersignature that costs a fingerprint, not a password, has no
-equivalent elsewhere.
+equivalent elsewhere. And signing always happens in the user's own wallet —
+apps issuing proofs never hold keys. On mobile this goes through the Mobile
+Wallet Adapter, on Seeker through Seed Vault.
 
 **Ownership that survives us.** The attestation lives in the user's wallet. If
 Iron Chain shuts down tomorrow, the proof remains, and remains verifiable.
