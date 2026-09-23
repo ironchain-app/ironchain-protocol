@@ -42,10 +42,36 @@ evidence serves all three.
 | `B` | **Bracketed** — timestamped photos at start and end, taken in-app | Something happened between t₀ and t₁ | Low to medium |
 | `M` | **Measured** — sensor data (heart rate, calories, steps) over t₀→t₁ | A body was under load | Medium |
 | `C` | **Coherent** — the heart-rate curve is physiologically consistent with the declared effort: ramp-up, plateau, recovery | The effort matches what is claimed | **High** |
-| `W` | **Witnessed** — countersigned by a peer present over video | A human saw the session | **Very high** |
+| `W` | **Witnessed** — countersigned by a peer present over video | A human saw the session | **High** |
 | `N` | **Notarized** — countersigned by a verified coach | An identified professional stakes their reputation | **Highest** |
 
 A proof carries the signals it actually has. Nothing more.
+
+### On paying witnesses
+
+A witness who is never paid does not show up, and a signal that never exists is
+worth exactly as much as a corrupted one: nothing. So witnesses are paid — and
+one rule makes that survivable.
+
+**They are paid for being present, not for the verdict.** The fee is the same
+whether they certify or decline. Buy a yes and you own a yes; buy attention and
+you own attention. Everything else follows from that line:
+
+- **Weight comes from history, not from the fee.** A key that has only ever
+  signed for one person counts for almost nothing. Distinct counterparts, key
+  age and refusals are what a reader should weigh — a witness who has declined
+  is worth more, not less.
+- **The reward scales with that history, and is destroyed by a false
+  attestation.** The witness is protecting future income, not closing a sale.
+- **Capped and held.** Earnings are capped per week and paid in arrears, so a
+  proof that is later challenged can still claw them back.
+
+This is why `W` is rated **high** and no longer *very high*: the honest cost of
+faking it is the price of a witness, multiplied by the standing they are willing
+to lose. That is a real cost, and it is not infinite. `N` sits above it because
+a verified coach is identified and can be struck off — the money makes an
+identified professional careful, where it could make an anonymous peer
+compliant.
 
 ### Why signals and not a score
 
