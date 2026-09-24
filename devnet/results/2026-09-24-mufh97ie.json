@@ -1,0 +1,195 @@
+{
+  "rpc": "https://api.devnet.solana.com",
+  "runTag": "mufh97ie",
+  "solUsd": {
+    "usd": 113.1,
+    "live": true
+  },
+  "metadataUri": "https://example.com/ironchain-badge.json",
+  "phantom": null,
+  "addresses": {
+    "credential": "At4XUznpQ2pj5ZEXsLm7w4RXgPaYRA7fE2YP6qSXc8PR",
+    "monthSchema": "64hkjkYyHxVccgQgyWNmwuPiXd96M7igbABRoRM7NPzu",
+    "badgeSchema": "9EZKfPe5N4zeHB4tRrsKdvPWyTGJwDnnoFasZFWaVKgQ",
+    "monthProof": "HXi7dhz5CbxsRHrgP8D2KjZGa75NTt4X2x7KigKNZk1J"
+  },
+  "ledger": [
+    {
+      "rail": "SAS",
+      "step": "credential (once)",
+      "paidLamports": "1102200",
+      "accounts": [
+        {
+          "label": "credential",
+          "address": "At4XUznpQ2pj5ZEXsLm7w4RXgPaYRA7fE2YP6qSXc8PR",
+          "size": 87,
+          "rent": "1092200"
+        }
+      ],
+      "outcome": "ok"
+    },
+    {
+      "rail": "SAS",
+      "step": "monthly schema (once)",
+      "paidLamports": "1650840",
+      "accounts": [
+        {
+          "label": "schema",
+          "address": "64hkjkYyHxVccgQgyWNmwuPiXd96M7igbABRoRM7NPzu",
+          "size": 195,
+          "rent": "1640840"
+        }
+      ],
+      "outcome": "ok"
+    },
+    {
+      "rail": "SAS",
+      "step": "badge schema (once)",
+      "paidLamports": "1488280",
+      "accounts": [
+        {
+          "label": "schema",
+          "address": "9EZKfPe5N4zeHB4tRrsKdvPWyTGJwDnnoFasZFWaVKgQ",
+          "size": 163,
+          "rent": "1478280"
+        }
+      ],
+      "outcome": "ok"
+    },
+    {
+      "rail": "SAS",
+      "step": "tokenize badge schema (once)",
+      "paidLamports": "2275680",
+      "accounts": [
+        {
+          "label": "schema mint",
+          "address": "BjKUuL224UiK46FXhVPb4kmzv1NNzqsP3PtGmpuwaomE",
+          "size": 318,
+          "rent": "2265680"
+        }
+      ],
+      "outcome": "ok"
+    },
+    {
+      "rail": "SAS",
+      "step": "monthly proof",
+      "paidLamports": "1782920",
+      "accounts": [
+        {
+          "label": "attestation",
+          "address": "HXi7dhz5CbxsRHrgP8D2KjZGa75NTt4X2x7KigKNZk1J",
+          "size": 221,
+          "rent": "1772920"
+        }
+      ],
+      "outcome": "ok"
+    },
+    {
+      "rail": "SAS",
+      "step": "badge",
+      "paidLamports": "7665560",
+      "accounts": [
+        {
+          "label": "attestation",
+          "address": "BeaDZmanz42YSqKhhKdFTpMSJw7QuRHjHgweEoEF6dJb",
+          "size": 219,
+          "rent": "1762760"
+        },
+        {
+          "label": "mint",
+          "address": "ANxVq8aJz559g1mYxtHK2wdCVQJa9gXcrpvj5gPxmgfR",
+          "size": 730,
+          "rent": "4358640"
+        },
+        {
+          "label": "user token account",
+          "address": "CeyXk3VgrfLsFKPoWcu9eSgWmuhpdvT8PkLiA3WCAVDa",
+          "size": 174,
+          "rent": "1534160"
+        }
+      ],
+      "outcome": "ok"
+    },
+    {
+      "rail": "SAS",
+      "step": "holder tries to transfer the badge",
+      "paidLamports": "0",
+      "accounts": [],
+      "outcome": "refused",
+      "note": "Transaction failed when it was simulated in order to estimate the compute unit consumption. The compute unit estimate provided is for a transaction that failed "
+    },
+    {
+      "rail": "SAS",
+      "step": "close the monthly proof (rent back)",
+      "paidLamports": "-1762920",
+      "accounts": [],
+      "outcome": "ok"
+    },
+    {
+      "rail": "SAS",
+      "step": "revoke the badge (burn + close)",
+      "paidLamports": "-6111400",
+      "accounts": [
+        {
+          "label": "user token account, left behind",
+          "address": "CeyXk3VgrfLsFKPoWcu9eSgWmuhpdvT8PkLiA3WCAVDa",
+          "size": 174,
+          "rent": "1534160"
+        }
+      ],
+      "outcome": "ok",
+      "note": "the holder's empty token account keeps its rent — only the holder can close it"
+    },
+    {
+      "rail": "Core",
+      "step": "badge collection (once)",
+      "paidLamports": "1447640",
+      "accounts": [
+        {
+          "label": "collection",
+          "address": "5RHWFV6iHvFZ7sR81128UnxRd9MpEzSpYTDR5L7DMQZZ",
+          "size": 155,
+          "rent": "1437640"
+        }
+      ],
+      "outcome": "ok"
+    },
+    {
+      "rail": "Core",
+      "step": "badge",
+      "paidLamports": "3338800",
+      "accounts": [
+        {
+          "label": "asset",
+          "address": "CCwg2XE7Xe3YJPC9dufi8uaGSgkiKbpnfhKdfXUqW72p",
+          "size": 232,
+          "rent": "3328800"
+        }
+      ],
+      "outcome": "ok"
+    },
+    {
+      "rail": "Core",
+      "step": "holder tries to transfer the badge",
+      "paidLamports": "0",
+      "accounts": [],
+      "outcome": "refused",
+      "note": "Invalid Authority"
+    },
+    {
+      "rail": "Core",
+      "step": "revoke the badge (burn)",
+      "paidLamports": "-1168480",
+      "accounts": [
+        {
+          "label": "asset remnant",
+          "address": "CCwg2XE7Xe3YJPC9dufi8uaGSgkiKbpnfhKdfXUqW72p",
+          "size": 1,
+          "rent": "2155320"
+        }
+      ],
+      "outcome": "ok",
+      "note": "a small remnant stays on-chain after the burn"
+    }
+  ]
+}

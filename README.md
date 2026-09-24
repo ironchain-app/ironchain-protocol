@@ -163,7 +163,15 @@ const proof = await emit({
 console.log(proof.explorerUrl);
 ```
 
-**A real attestation, live on devnet:** *coming with the first schema deployment.*
+**Live on devnet** (Solana Attestation Service):
+
+| | Address |
+|---|---|
+| Issuer credential `IRONCHAIN` | [`HXXy1V3Xhq6uqTADqRH82kA2KFNFSpyw1YDfS6UcLktY`](https://explorer.solana.com/address/HXXy1V3Xhq6uqTADqRH82kA2KFNFSpyw1YDfS6UcLktY?cluster=devnet) |
+| Schema `ironchain-month` v1 | [`4foH7uRksuSKzWbTyhM3ZdjrRBTQmsmBQewag7VPh5a5`](https://explorer.solana.com/address/4foH7uRksuSKzWbTyhM3ZdjrRBTQmsmBQewag7VPh5a5?cluster=devnet) |
+
+A session stays with the user; one attestation a month carries the Merkle root
+of their signed sessions. See [`schemas/`](schemas/).
 
 Anyone can verify it without us, without an account, and without asking
 permission. That is the point.
@@ -200,7 +208,8 @@ The honesty test for a public good: what is it worth **without** Iron Chain?
 ## Repository layout
 
 ```
-schemas/    SAS schema definitions, one per attestation type   (coming)
+schemas/    the session leaf and the monthly on-chain schema
+devnet/     deployment script and cost bench, devnet only
 sdk/        TypeScript SDK — emit, read, verify                 (coming)
 flutter/    Flutter plugin over the same SDK                    (later)
 docs/       Integration guide                                   (coming)

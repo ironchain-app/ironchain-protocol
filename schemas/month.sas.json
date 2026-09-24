@@ -1,0 +1,14 @@
+{
+  "name": "ironchain-month",
+  "version": 1,
+  "description": "One month of sessions: the Merkle root of the signed workout-completed leaves.",
+  "fields": [
+    { "name": "schemaVersion", "type": "U8",    "note": "1" },
+    { "name": "periodStart",   "type": "I64",   "note": "first second of the month, UTC" },
+    { "name": "merkleRoot",    "type": "VecU8", "note": "32 bytes, see schemas/README.md" },
+    { "name": "leafCount",     "type": "U16",   "note": "sessions in the tree" },
+    { "name": "leafVersion",   "type": "U8",    "note": "version of workout-completed the leaves follow" }
+  ],
+  "nonce": "sha256(subject public key bytes ‖ \"ironchain-month\" ‖ \"YYYY-MM\") — one proof per person per month, findable by anyone who knows the key and the month",
+  "expiry": "periodStart + 6 months; the issuer closes it then and the rent comes back"
+}

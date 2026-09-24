@@ -1,0 +1,20 @@
+{
+  "cluster": "devnet",
+  "program": "22zoJMtdu4tQc2PzL74ZUT7FrwgB1Udec8DdW4yw4BdG",
+  "credential": {
+    "name": "IRONCHAIN",
+    "address": "HXXy1V3Xhq6uqTADqRH82kA2KFNFSpyw1YDfS6UcLktY",
+    "authority": "742Ky5D88EGep7dcy7Yqtz2JRW1T6X9qaC9w8nFKrzuP",
+    "signers": [
+      "6pCRLnq1SFUqWzB6k9GftisE4FrCngWqHPPEAuWV2VND"
+    ],
+    "rentSol": 0.0010668
+  },
+  "schemas": {
+    "ironchain-month": {
+      "version": 1,
+      "address": "4foH7uRksuSKzWbTyhM3ZdjrRBTQmsmBQewag7VPh5a5",
+      "rentSol": 0.00178308
+    }
+  }
+}

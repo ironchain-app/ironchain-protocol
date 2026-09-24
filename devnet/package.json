@@ -1,0 +1,24 @@
+{
+  "name": "ironchain-devnet-bench",
+  "private": true,
+  "type": "module",
+  "description": "Measures, on devnet, what a monthly proof and a badge really cost: SAS vs Metaplex Core.",
+  "scripts": {
+    "bench": "tsx bench.ts",
+    "deploy": "tsx deploy.ts"
+  },
+  "dependencies": {
+    "@metaplex-foundation/mpl-core": "^1.10.0",
+    "@metaplex-foundation/umi": "^1.6.0",
+    "@metaplex-foundation/umi-bundle-defaults": "^1.6.0",
+    "@solana-program/compute-budget": "^0.17.0",
+    "@solana-program/token-2022": "^0.15.0",
+    "@solana/kit": "^7.0.0",
+    "sas-lib": "2.0.0-beta.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.8.3"
+  }
+}
