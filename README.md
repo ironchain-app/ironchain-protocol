@@ -43,7 +43,7 @@ evidence serves all three.
 | `M` | **Measured** — sensor data (heart rate, calories, steps) over t₀→t₁ | A body was under load | Medium |
 | `C` | **Coherent** — the heart-rate curve is physiologically consistent with the declared effort: ramp-up, plateau, recovery | The effort matches what is claimed | **High** |
 | `W` | **Witnessed** — countersigned by a peer present over video | A human saw the session | **High** |
-| `N` | **Notarized** — countersigned by a verified coach | An identified professional stakes their reputation | **Highest** |
+| `N` | **Notarized** — countersigned by an accredited professional: a coach in a training app, a physiotherapist in rehabilitation, an inspector on a site, an investigator in a trial | An identified professional stakes their reputation | **Highest** |
 
 A proof carries the signals it actually has. Nothing more.
 
