@@ -89,6 +89,25 @@ proof verifies without it, and without the issuer.
 `signature` and `slot` are what survive the closing of the account: with them,
 any archive node returns the original transaction and its data.
 
+## Open: changing key
+
+A leaf's `subject` **is** the identity, and a month's attestation is derived
+from it — `nonce = SHA-256(subject ‖ "ironchain-month" ‖ "YYYY-MM")`. A root
+therefore covers exactly one key.
+
+Someone who changes wallet mid-month loses nothing: both sets of leaves stay
+valid and verifiable. But they do not add up. That month produces two
+attestations, a streak restarts, a record loses its past, and badges already
+minted stay frozen on the old key. Nothing links the two, on purpose —
+writing "these two addresses are the same person" would publish an identity
+claim nobody can check.
+
+**This is not specified yet.** The expected shape is a rotation statement
+signed on both sides: the old key declares that its proofs continue under the
+new one, the new key countersigns, and each reader decides whether to follow
+the chain. Until it is written, an issuer should not offer a migration: a
+known limit beats an improvised link.
+
 ## Versions
 
 Fields are never edited in place. A change to `workout-completed` is a new
