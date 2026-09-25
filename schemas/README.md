@@ -21,6 +21,29 @@ Two layers. The session stays with the user; only a month's fingerprint goes on-
 4. **Attestation.** The issuer writes one `ironchain-month` attestation per
    person per month, with the nonce and expiry given in `month.sas.json`.
 
+## Verifying a leaf by hand
+
+[`verify_leaf.py`](verify_leaf.py) recomputes a leaf's hash from the file
+alone — no dependency, no network, nothing borrowed from the app that wrote
+it. A first leaf signed on a real phone on 25 September 2026 verifies: the
+hash matches, and the Ed25519 signature checks out against the subject's key.
+
+## What the wallet signs
+
+Not the 32 raw bytes of the hash — a printable text that carries it:
+
+```
+Iron Chain
+Sign this session
+proof-of-activity/workout-completed/v1
+leaf <64 hex chars>
+```
+
+A wallet handed an opaque blob cannot tell its holder what they are signing;
+that is the shape of a disguised transaction, and Solflare says so out loud.
+The text above is displayed as-is, and no runtime will ever execute it. A
+verifier rebuilds it from the leaf — there is nothing to guess.
+
 ## Test vectors
 
 [`vectors/workout-completed-v1.json`](vectors/workout-completed-v1.json) holds
