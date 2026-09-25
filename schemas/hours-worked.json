@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/ironchain-app/ironchain-protocol/main/schemas/hours-worked.json",
+  "title": "hours-worked v1",
+  "description": "One shift, signed by the person who worked it. Apprenticeship hours, volunteering, community service, an internship — anything counted in hours by someone who was not in the room. It is a second profile of the same leaf (see leaf.base.json) and it exists to prove a point: the anchoring layer below it does not know what an hour of work is, any more than it knows what a squat is. Same envelope, same six signals, same monthly attestation.",
+  "type": "object",
+  "additionalProperties": false,
+  "allOf": [{ "$ref": "leaf.base.json" }],
+  "required": ["schema", "subject", "window", "category", "signals", "payloadHash", "signature"],
+  "properties": {
+    "schema": { "const": "proof-of-presence/hours-worked/v1" },
+
+    "subject": { "$ref": "leaf.base.json#/$defs/publicKey" },
+    "window": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start", "end"],
+      "properties": {
+        "start": { "$ref": "leaf.base.json#/$defs/unixSeconds" },
+        "end": { "$ref": "leaf.base.json#/$defs/unixSeconds" }
+      },
+      "description": "The shift. end > start, and end - start <= 16 hours — a single shift, not a week folded into one leaf."
+    },
+
+    "category": {
+      "enum": ["apprenticeship", "internship", "volunteering", "community-service", "training"],
+      "description": "What the hours count towards. Coarse on purpose: the detail lives in the payload, and the reader who needs it asks the subject."
+    },
+    "organisation": {
+      "$ref": "leaf.base.json#/$defs/sha256",
+      "description": "SHA-256 of the organisation's identifier, salted per issuer. Where someone volunteers can say a great deal about them — a shelter, a clinic, a party. The digest lets a reader confirm 'the same place as last week' without learning which place, and the subject can reveal the preimage when they choose to."
+    },
+    "supervised": {
+      "type": "boolean",
+      "description": "Whether a supervisor was present for the whole window. Distinct from W and N, which say that one signed: someone can be present all day and sign nothing."
+    },
+
+    "signals": { "$ref": "leaf.base.json#/properties/signals" },
+    "payloadHash": { "$ref": "leaf.base.json#/properties/payloadHash" },
+    "photoHashes": { "$ref": "leaf.base.json#/properties/photoHashes" },
+    "device": { "$ref": "leaf.base.json#/properties/device" },
+    "cosigners": { "$ref": "leaf.base.json#/properties/cosigners" },
+    "meta": { "$ref": "leaf.base.json#/properties/meta" },
+    "signature": { "$ref": "leaf.base.json#/properties/signature" }
+  },
+
+  "$comment": "Every base property is re-listed above because `additionalProperties: false` does not see through `$ref` — a known JSON Schema rule, explained in spec/profiles.md. The `allOf` is what makes the base normative; the re-listing is what keeps the profile closed."
+}

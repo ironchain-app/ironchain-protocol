@@ -1,0 +1,93 @@
+{
+  "note": "Vectors for the hours-worked v1 profile. A second domain on the same base (see spec/profiles.md): the canonicalisation, the 0x00 / 0x01 prefixes, the signals and the monthly root are identical to workout-completed — only the three domain fields differ. Regenerate with make_hours_worked_v1.py.",
+  "leaves": [
+    {
+      "leaf": {
+        "schema": "proof-of-presence/hours-worked/v1",
+        "subject": "742Ky5D88EGep7dcy7Yqtz2JRW1T6X9qaC9w8nFKrzuP",
+        "window": {
+          "start": 1788300000,
+          "end": 1788328800
+        },
+        "category": "volunteering",
+        "organisation": "8293503cb36113cbe1f4fadc38419530f0eb14e8b5ab316ae7645b6d9e95f665",
+        "signals": [
+          "D"
+        ],
+        "payloadHash": "f145cba08c0917b2b3abec256fae8e38d55f9b7a37c130841c9c668934816d76"
+      },
+      "canonical": "{\"category\":\"volunteering\",\"organisation\":\"8293503cb36113cbe1f4fadc38419530f0eb14e8b5ab316ae7645b6d9e95f665\",\"payloadHash\":\"f145cba08c0917b2b3abec256fae8e38d55f9b7a37c130841c9c668934816d76\",\"schema\":\"proof-of-presence/hours-worked/v1\",\"signals\":[\"D\"],\"subject\":\"742Ky5D88EGep7dcy7Yqtz2JRW1T6X9qaC9w8nFKrzuP\",\"window\":{\"end\":1788328800,\"start\":1788300000}}",
+      "leafHash": "b199f3e9cdf96e76f1093ab0c7341afc26f80806aeb0d2630f248e81ccc52473"
+    },
+    {
+      "leaf": {
+        "schema": "proof-of-presence/hours-worked/v1",
+        "subject": "742Ky5D88EGep7dcy7Yqtz2JRW1T6X9qaC9w8nFKrzuP",
+        "window": {
+          "start": 1788386400,
+          "end": 1788415200
+        },
+        "category": "apprenticeship",
+        "organisation": "8293503cb36113cbe1f4fadc38419530f0eb14e8b5ab316ae7645b6d9e95f665",
+        "supervised": true,
+        "signals": [
+          "D",
+          "B",
+          "M"
+        ],
+        "photoHashes": [
+          "62307b056d8a83ace227bd1cf93da78fa3d9d500350a8c15c9078674acb4064e",
+          "40b4e8a97a8dc832dba0ae7ce567d24941dbaf2785814de89775b32f37ba53a2"
+        ],
+        "device": {
+          "kind": "terminal",
+          "baselineDays": 214
+        },
+        "payloadHash": "2f78959f121e9ba03b53b774965a92ccbc574529bce48fedab611cb9003f1c28"
+      },
+      "canonical": "{\"category\":\"apprenticeship\",\"device\":{\"baselineDays\":214,\"kind\":\"terminal\"},\"organisation\":\"8293503cb36113cbe1f4fadc38419530f0eb14e8b5ab316ae7645b6d9e95f665\",\"payloadHash\":\"2f78959f121e9ba03b53b774965a92ccbc574529bce48fedab611cb9003f1c28\",\"photoHashes\":[\"62307b056d8a83ace227bd1cf93da78fa3d9d500350a8c15c9078674acb4064e\",\"40b4e8a97a8dc832dba0ae7ce567d24941dbaf2785814de89775b32f37ba53a2\"],\"schema\":\"proof-of-presence/hours-worked/v1\",\"signals\":[\"D\",\"B\",\"M\"],\"subject\":\"742Ky5D88EGep7dcy7Yqtz2JRW1T6X9qaC9w8nFKrzuP\",\"supervised\":true,\"window\":{\"end\":1788415200,\"start\":1788386400}}",
+      "leafHash": "dab06a97bfa43769e6c4274b5e7ea6e6868cdcc4190553e11a777d15a7cd8221"
+    },
+    {
+      "leaf": {
+        "schema": "proof-of-presence/hours-worked/v1",
+        "subject": "742Ky5D88EGep7dcy7Yqtz2JRW1T6X9qaC9w8nFKrzuP",
+        "window": {
+          "start": 1788472800,
+          "end": 1788501600
+        },
+        "category": "apprenticeship",
+        "organisation": "8293503cb36113cbe1f4fadc38419530f0eb14e8b5ab316ae7645b6d9e95f665",
+        "supervised": true,
+        "signals": [
+          "D",
+          "N"
+        ],
+        "cosigners": [
+          {
+            "key": "8pQ9RLsaCk2uwbmSvhPuTzZUbrq3gkQ1nxvDe5tYwF4h",
+            "role": "notarized",
+            "signature": "5Kd3NBUAdUnhyzenEwVLy9pBKxSwXvE9FMPyR4UKZvpe6E3AHbrRkVqfdBxZPLbeKp1ujV7WLrQvNbEUkhAzHGqV"
+          }
+        ],
+        "payloadHash": "e995945a4f8a5511c1bc9472edfa54b206743657fc19e7b55d0fb02e71c32c1f"
+      },
+      "canonical": "{\"category\":\"apprenticeship\",\"cosigners\":[{\"key\":\"8pQ9RLsaCk2uwbmSvhPuTzZUbrq3gkQ1nxvDe5tYwF4h\",\"role\":\"notarized\",\"signature\":\"5Kd3NBUAdUnhyzenEwVLy9pBKxSwXvE9FMPyR4UKZvpe6E3AHbrRkVqfdBxZPLbeKp1ujV7WLrQvNbEUkhAzHGqV\"}],\"organisation\":\"8293503cb36113cbe1f4fadc38419530f0eb14e8b5ab316ae7645b6d9e95f665\",\"payloadHash\":\"e995945a4f8a5511c1bc9472edfa54b206743657fc19e7b55d0fb02e71c32c1f\",\"schema\":\"proof-of-presence/hours-worked/v1\",\"signals\":[\"D\",\"N\"],\"subject\":\"742Ky5D88EGep7dcy7Yqtz2JRW1T6X9qaC9w8nFKrzuP\",\"supervised\":true,\"window\":{\"end\":1788501600,\"start\":1788472800}}",
+      "leafHash": "fb43485ca58083c77eb8f1ffee0732a9ddf2f1536b719cbb51ef5dd9b4fa4413"
+    }
+  ],
+  "monthRoot": {
+    "monthKey": "2026-09",
+    "leafHashes": [
+      "b199f3e9cdf96e76f1093ab0c7341afc26f80806aeb0d2630f248e81ccc52473",
+      "dab06a97bfa43769e6c4274b5e7ea6e6868cdcc4190553e11a777d15a7cd8221",
+      "fb43485ca58083c77eb8f1ffee0732a9ddf2f1536b719cbb51ef5dd9b4fa4413"
+    ],
+    "root": "47a2246fd38ce78c75ca05ea8e99be720d0800482f52301cf9fe3a59a72f300d"
+  },
+  "monthNonce": {
+    "subjectKeyHex": "0707070707070707070707070707070707070707070707070707070707070707",
+    "monthKey": "2026-09",
+    "nonce": "a6aa76e479eb4071808ebef05c0e085aa387d23245cd653455d4d030f0a562db"
+  }
+}

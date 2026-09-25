@@ -1,0 +1,106 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/ironchain-app/ironchain-protocol/main/schemas/leaf.base.json",
+  "title": "Iron Chain leaf — base envelope",
+  "description": "Every leaf, in every domain, is this. A profile adds the fields its trade needs and nothing else. The protocol never learns what is being proved: it carries a subject, a window, a set of signals and a digest of whatever happened. See spec/leaf.md and spec/profiles.md.",
+  "type": "object",
+  "required": ["schema", "subject", "window", "signals", "payloadHash", "signature"],
+  "properties": {
+    "schema": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+(/[a-z0-9-]+)+/v[0-9]+$",
+      "description": "The profile this leaf follows, `family/name/vN`. A change to any field is a new version, never an edit."
+    },
+    "subject": {
+      "$ref": "#/$defs/publicKey",
+      "description": "The key the fact belongs to. The same key signs this leaf. It is the only identity the protocol has — who it belongs to is never written."
+    },
+    "window": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start", "end"],
+      "properties": {
+        "start": { "$ref": "#/$defs/unixSeconds" },
+        "end": { "$ref": "#/$defs/unixSeconds" }
+      },
+      "description": "When it happened, in UTC seconds. end > start. A profile may cap the span; the base does not."
+    },
+    "signals": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 1,
+      "items": { "enum": ["D", "B", "M", "C", "W", "N"] },
+      "contains": { "const": "D" },
+      "description": "The signals this leaf actually has — see spec/signals.md. D is always there. No score and no level: a reader derives its own."
+    },
+    "payloadHash": {
+      "$ref": "#/$defs/sha256",
+      "description": "SHA-256 of the off-chain payload — the detail of what happened, in whatever shape the profile defines. The payload itself never leaves the subject unless they show it."
+    },
+    "photoHashes": {
+      "type": "array",
+      "prefixItems": [{ "$ref": "#/$defs/sha256" }, { "$ref": "#/$defs/sha256" }],
+      "items": false,
+      "minItems": 2,
+      "description": "SHA-256 of the capture at the start of the window and at its end, taken in-app. Required with B. It does not prove what happened between them — it proves the window was inhabited."
+    },
+    "device": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "baselineDays"],
+      "properties": {
+        "kind": {
+          "enum": ["phone", "watch", "ring", "wearable", "sensor", "terminal", "vehicle"],
+          "description": "What produced the numbers. `terminal` covers a fixed reader — a time clock, a badge post."
+        },
+        "baselineDays": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "How many days of history this device had on this subject when the window opened. A week-old device proves less than a year-old one, and C cannot be computed without a baseline."
+        }
+      },
+      "description": "The instrument behind M and C. Required with either."
+    },
+    "cosigners": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["key", "role", "signature"],
+        "properties": {
+          "key": { "$ref": "#/$defs/publicKey" },
+          "role": {
+            "enum": ["witness", "notarized"],
+            "description": "`witness` — a human who was present, no accreditation required. `notarized` — a human whose accreditation the issuer verified, and who stakes it. The protocol names the role; the app names the trade."
+          },
+          "signature": {
+            "$ref": "#/$defs/signature",
+            "description": "Ed25519 signature of the cosigner over payloadHash (the 32 raw bytes)."
+          }
+        }
+      },
+      "description": "Required with W or N."
+    },
+    "meta": {
+      "type": "object",
+      "description": "Free, per issuer. Never identifying, never medical, never anything a reader could use to find the person behind the key."
+    },
+    "signature": {
+      "$ref": "#/$defs/signature",
+      "description": "Ed25519 signature of the subject over the signing message built from the leaf hash. See spec/leaf.md."
+    }
+  },
+  "allOf": [
+    { "if": { "properties": { "signals": { "contains": { "const": "B" } } } }, "then": { "required": ["photoHashes"] } },
+    { "if": { "properties": { "signals": { "contains": { "const": "M" } } } }, "then": { "required": ["device"] } },
+    { "if": { "properties": { "signals": { "contains": { "const": "C" } } } }, "then": { "required": ["device"] } },
+    { "if": { "properties": { "signals": { "contains": { "enum": ["W", "N"] } } } }, "then": { "required": ["cosigners"] } }
+  ],
+  "$defs": {
+    "publicKey": { "type": "string", "pattern": "^[1-9A-HJ-NP-Za-km-z]{32,44}$", "description": "Base58 Solana public key." },
+    "signature": { "type": "string", "pattern": "^[1-9A-HJ-NP-Za-km-z]{64,88}$", "description": "Base58 Ed25519 signature." },
+    "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$", "description": "Lower-case hex SHA-256." },
+    "unixSeconds": { "type": "integer", "minimum": 1700000000 }
+  }
+}

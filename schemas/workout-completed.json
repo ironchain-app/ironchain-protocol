@@ -1,8 +1,9 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://raw.githubusercontent.com/ironchain-app/ironchain-protocol/main/schemas/workout-completed.json",
-  "title": "workout-completed v1",
-  "description": "One finished session, signed by the user's own wallet. It stays off-chain: only its hash enters the monthly Merkle root (see month.sas.json). Nothing identifying and nothing medical — only digests, timestamps, public keys and signal codes.",
+  "title": "workout-completed v1 (superseded by v2)",
+  "deprecated": true,
+  "description": "SUPERSEDED — use workout-completed-v2.json. Kept unchanged so that leaves already signed under v1 keep verifying forever; v2 expresses the same thing as a profile of leaf.base.json and renames the cosigner role `coach` to `notarized`. See spec/profiles.md. — One finished session, signed by the user's own wallet. It stays off-chain: only its hash enters the monthly Merkle root (see month.sas.json). Nothing identifying and nothing medical — only digests, timestamps, public keys and signal codes.",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema", "subject", "window", "activity", "signals", "payloadHash", "signature"],

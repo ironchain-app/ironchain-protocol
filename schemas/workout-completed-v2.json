@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/ironchain-app/ironchain-protocol/main/schemas/workout-completed-v2.json",
+  "title": "workout-completed v2",
+  "description": "One finished session, signed by the subject's own wallet. It stays off-chain: only its hash enters the monthly Merkle root (see month.sas.json). Nothing identifying and nothing medical — only digests, timestamps, public keys and signal codes. v2 is v1 expressed as a profile of leaf.base.json, with one substantive change: the cosigner role `coach` becomes `notarized`. See spec/profiles.md for why that is a version and not a correction.",
+  "type": "object",
+  "additionalProperties": false,
+  "allOf": [{ "$ref": "leaf.base.json" }],
+  "required": ["schema", "subject", "window", "activity", "signals", "payloadHash", "signature"],
+  "properties": {
+    "schema": { "const": "proof-of-activity/workout-completed/v2" },
+
+    "subject": { "$ref": "leaf.base.json#/$defs/publicKey" },
+    "window": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start", "end"],
+      "properties": {
+        "start": { "$ref": "leaf.base.json#/$defs/unixSeconds" },
+        "end": { "$ref": "leaf.base.json#/$defs/unixSeconds" }
+      },
+      "description": "When the session ran, in UTC seconds. end > start, and end - start <= 6 hours."
+    },
+
+    "activity": {
+      "enum": ["strength", "conditioning", "mixed", "endurance", "mobility", "other"],
+      "description": "What kind of effort. Coarse on purpose: the detail lives in the payload."
+    },
+
+    "signals": { "$ref": "leaf.base.json#/properties/signals" },
+    "payloadHash": { "$ref": "leaf.base.json#/properties/payloadHash" },
+    "photoHashes": { "$ref": "leaf.base.json#/properties/photoHashes" },
+    "device": { "$ref": "leaf.base.json#/properties/device" },
+    "cosigners": { "$ref": "leaf.base.json#/properties/cosigners" },
+    "meta": { "$ref": "leaf.base.json#/properties/meta" },
+    "signature": { "$ref": "leaf.base.json#/properties/signature" }
+  },
+
+  "$comment": "Every base property is re-listed above because `additionalProperties: false` does not see through `$ref`. See spec/profiles.md."
+}
