@@ -21,6 +21,18 @@ Two layers. The session stays with the user; only a month's fingerprint goes on-
 4. **Attestation.** The issuer writes one `ironchain-month` attestation per
    person per month, with the nonce and expiry given in `month.sas.json`.
 
+## Test vectors
+
+[`vectors/workout-completed-v1.json`](vectors/workout-completed-v1.json) holds
+three leaves — declared only, with photos and a watch, with a witness — each
+with its canonical form and its hash, then the root of the month they make and
+a month nonce.
+
+An implementation that reproduces these bytes can be verified by anyone; one
+that does not, cannot. They come from the Dart implementation shipped in the
+app (`lib/solana/leaf.dart`), where a test fails the day the canonicalisation
+moves. A format change is a `/v2`, never a correction.
+
 ## Verifying one session
 
 Given a leaf, its inclusion path and the subject's key, anyone can: check the

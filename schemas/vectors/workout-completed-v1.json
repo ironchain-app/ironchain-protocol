@@ -1,0 +1,95 @@
+{
+  "note": "Vecteurs du format workout-completed v1. Toute implémentation doit retrouver exactement ces octets : la canonicalisation (RFC 8785) et les préfixes 0x00 / 0x01 sont ce qui rend une preuve vérifiable sans nous.",
+  "leaves": [
+    {
+      "leaf": {
+        "schema": "proof-of-activity/workout-completed/v1",
+        "subject": "742Ky5D88EGep7dcy7Yqtz2JRW1T6X9qaC9w8nFKrzuP",
+        "window": {
+          "start": 1788300000,
+          "end": 1788302400
+        },
+        "activity": "mixed",
+        "signals": [
+          "D"
+        ],
+        "payloadHash": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"
+      },
+      "canonical": "{\"activity\":\"mixed\",\"payloadHash\":\"9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08\",\"schema\":\"proof-of-activity/workout-completed/v1\",\"signals\":[\"D\"],\"subject\":\"742Ky5D88EGep7dcy7Yqtz2JRW1T6X9qaC9w8nFKrzuP\",\"window\":{\"end\":1788302400,\"start\":1788300000}}",
+      "leafHash": "443177619ed658f2a64b8abf8c43242b37521eaf7361cc932882f85ef6fb1f41"
+    },
+    {
+      "leaf": {
+        "schema": "proof-of-activity/workout-completed/v1",
+        "subject": "742Ky5D88EGep7dcy7Yqtz2JRW1T6X9qaC9w8nFKrzuP",
+        "window": {
+          "start": 1788386400,
+          "end": 1788390000
+        },
+        "activity": "conditioning",
+        "signals": [
+          "D",
+          "B",
+          "M",
+          "C"
+        ],
+        "payloadHash": "2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae",
+        "photoHashes": [
+          "fcde2b2edba56bf408601fb721fe9b5c338d10ee429ea04fae5511b68fbf8fb9",
+          "0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c"
+        ],
+        "device": {
+          "kind": "watch",
+          "baselineDays": 47
+        }
+      },
+      "canonical": "{\"activity\":\"conditioning\",\"device\":{\"baselineDays\":47,\"kind\":\"watch\"},\"payloadHash\":\"2c26b46b68ffc68ff99b453c1d30413413422d706483bfa0f98a5e886266e7ae\",\"photoHashes\":[\"fcde2b2edba56bf408601fb721fe9b5c338d10ee429ea04fae5511b68fbf8fb9\",\"0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c\"],\"schema\":\"proof-of-activity/workout-completed/v1\",\"signals\":[\"D\",\"B\",\"M\",\"C\"],\"subject\":\"742Ky5D88EGep7dcy7Yqtz2JRW1T6X9qaC9w8nFKrzuP\",\"window\":{\"end\":1788390000,\"start\":1788386400}}",
+      "leafHash": "39efc59724b6349be3f1a0d201a61890f58557d4a2b056e6398678a08f01118d"
+    },
+    {
+      "leaf": {
+        "schema": "proof-of-activity/workout-completed/v1",
+        "subject": "742Ky5D88EGep7dcy7Yqtz2JRW1T6X9qaC9w8nFKrzuP",
+        "window": {
+          "start": 1788472800,
+          "end": 1788475500
+        },
+        "activity": "strength",
+        "signals": [
+          "D",
+          "M",
+          "C",
+          "W"
+        ],
+        "payloadHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "device": {
+          "kind": "phone",
+          "baselineDays": 3
+        },
+        "cosigners": [
+          {
+            "key": "6pCRLnq1SFUqWzB6k9GftisE4FrCngWqHPPEAuWV2VND",
+            "role": "witness",
+            "signature": "5wHu1qwD4kLpA2n6LrJ8NxLkE2Wd9rQ3vY7tZ1cXhF4mBnKpSgUvRjTyMoPqXzAbCdEfGhJkLmNpQrStUvWxYz"
+          }
+        ]
+      },
+      "canonical": "{\"activity\":\"strength\",\"cosigners\":[{\"key\":\"6pCRLnq1SFUqWzB6k9GftisE4FrCngWqHPPEAuWV2VND\",\"role\":\"witness\",\"signature\":\"5wHu1qwD4kLpA2n6LrJ8NxLkE2Wd9rQ3vY7tZ1cXhF4mBnKpSgUvRjTyMoPqXzAbCdEfGhJkLmNpQrStUvWxYz\"}],\"device\":{\"baselineDays\":3,\"kind\":\"phone\"},\"payloadHash\":\"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\"schema\":\"proof-of-activity/workout-completed/v1\",\"signals\":[\"D\",\"M\",\"C\",\"W\"],\"subject\":\"742Ky5D88EGep7dcy7Yqtz2JRW1T6X9qaC9w8nFKrzuP\",\"window\":{\"end\":1788475500,\"start\":1788472800}}",
+      "leafHash": "634ba42f154096c31dec1e5d80dfc83131f70904c58631241b876f95754e130a"
+    }
+  ],
+  "monthRoot": {
+    "monthKey": "2026-09",
+    "leafHashes": [
+      "443177619ed658f2a64b8abf8c43242b37521eaf7361cc932882f85ef6fb1f41",
+      "39efc59724b6349be3f1a0d201a61890f58557d4a2b056e6398678a08f01118d",
+      "634ba42f154096c31dec1e5d80dfc83131f70904c58631241b876f95754e130a"
+    ],
+    "root": "40782346ee9f36c2c226fbfa0a599af26a73f8a87b200e7dc148a026b80c18a0"
+  },
+  "monthNonce": {
+    "subjectKeyHex": "0707070707070707070707070707070707070707070707070707070707070707",
+    "monthKey": "2026-09",
+    "nonce": "a6aa76e479eb4071808ebef05c0e085aa387d23245cd653455d4d030f0a562db"
+  }
+}
