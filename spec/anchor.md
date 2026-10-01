@@ -6,6 +6,12 @@
 A month of leaves becomes **one** attestation on Solana. Not one write per
 fact: twelve writes a year, per subject, whatever the subject did.
 
+> **Draft, 1 October 2026.** The month of an attestation becomes the month it
+> is *written*, not the month the sessions took place, and the leaves inside it
+> stay grouped by session month. See [The anchoring month](#the-anchoring-month-draft).
+> Everything else on this page still holds; the implementations in
+> `devnet/anchor.ts` and in the app still build the one-level tree below.
+
 That ratio is the reason the protocol exists. A design that writes every fact
 is affordable in a demo and impossible in production; at one write per
 fact, a serious user costs more in rent than they will ever pay.
@@ -118,6 +124,72 @@ proof verifies without it, and without the issuer.
 
 `signature` and `slot` are what survive the closing of the account: with them,
 any archive node returns the original transaction and its data.
+
+## The anchoring month (draft)
+
+> Written on 1 October 2026 by Joris, while Léo is ill, from a decision taken
+> the same day. To be reviewed by Léo. Nothing below is implemented yet: the
+> attestations written so far use `schemaVersion` 1 and the one-level tree.
+
+**A leaf is anchored in the month it reaches the issuer, never in an earlier
+one.** A session signed offline on the 31st and sent on the 3rd goes into the
+3rd's month. A subject whose issuer anchors nothing for a year — a free plan,
+say — keeps signing leaves; the first anchor written for them carries all of
+them at once. No month is ever rewritten after it is anchored, and nothing is
+lost waiting: the leaves stay on the subject's device, and in their encrypted
+backup if they keep one.
+
+The address and the expiry follow the anchoring month: the nonce uses its
+`YYYY-MM`, `periodStart` is its first second, and the attestation expires six
+months later. An anchor written in October may therefore prove a session from
+March. The leaf's own `window` still says when the session happened; the
+anchoring month only says when it was written.
+
+### Grouped by session month
+
+Inside one anchor, the leaves stay **separated by the month their session took
+place** (`window.start`, UTC). That is what lets a subject, on their own device,
+match their decrypted data month by month against what was anchored — the
+issuer never needs to see that data, and never does.
+
+1. For each session month `m` present, build the tree of its leaves exactly as
+   in [The Merkle root](#the-merkle-root). Its top is the sub-root `R(m)`.
+2. Turn each into a month node: `SHA-256(0x02 ‖ "YYYY-MM" ‖ R(m))`. The prefix
+   `0x02` keeps a month node from being mistaken for a leaf (`0x00`) or an
+   inner node (`0x01`).
+3. **Sort the month nodes by their `YYYY-MM`**, ascending, and pair them with
+   the same rule as above (`0x01`, odd node carried up). The top is
+   `merkleRoot`.
+
+The on-chain layout does not change: `merkleRoot` is still 32 bytes and
+`leafCount` counts every leaf in the anchor. `schemaVersion` says which tree was
+built — 1 for the one-level tree, **2** for the tree grouped by session month.
+
+### Verifying a leaf under version 2
+
+1. Verify the leaf ([`leaf.md`](leaf.md)).
+2. Recompute `R(m)` from `leafHash` and its path, then the month node.
+3. Recompute the root from the month node and its path.
+4. Derive the address from `subject` and the **anchoring** month, and compare.
+
+The anchoring month comes from the receipt. Without one, a verifier tries the
+session's month, then each following month: the addresses cost nothing to
+derive, and a subject has at most one anchor per month.
+
+The receipt gains what step 2 and step 4 need:
+
+```jsonc
+{
+  "anchorMonth": "2026-10",
+  "months": [{ "month": "2026-03", "subRoot": "<hex>", "leafCount": 12 }],
+  "leaves": [{ "leafHash": "<hex>", "month": "2026-03",
+               "path": ["<hex>", "..."], "monthPath": ["<hex>", "..."] }]
+}
+```
+
+What the issuer receives to write an anchor is the leaves' hashes and
+signatures, so that it can refuse an invalid one — never the payload, and
+never the decrypted data the subject matches against it.
 
 ## Versions
 
