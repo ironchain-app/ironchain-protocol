@@ -87,18 +87,39 @@ With the leaf file alone, and no network:
 1. Validate it against its profile schema.
 2. Recompute `leafHash` (steps above).
 3. Rebuild the signing message and verify `signature` against `subject`.
-4. If `cosigners` is present, verify each signature over the 32 raw bytes of
-   `payloadHash`.
+4. If `cosigners` is present, rebuild each cosigner's text (below) and verify
+   their signature against their `key`.
 
 That is the whole test, and it needs neither the issuer nor us.
-[`../schemas/verify_leaf.py`](../schemas/verify_leaf.py) does it in 78 lines
-without importing a line of the app that wrote the leaf.
+[`../schemas/verify_leaf.py`](../schemas/verify_leaf.py) does steps 2 and 3's
+text in 78 lines, without importing a line of the app that wrote the leaf: it
+recomputes `leafHash` and prints the message the wallet displayed. Checking
+the Ed25519 signatures themselves takes any Ed25519 library:
+[`../devnet/anchor.ts`](../devnet/anchor.ts) checks the subject's before it
+anchors a month, and the open verifier will run all four steps.
 
 **Cosigners sign `payloadHash`, not `leafHash`.** A witness signs what
 happened, not the record of it — otherwise their signature would have to be
 folded back into the leaf that contains it, and no order of operations
 resolves that. It also means a cosigner never sees `signals`, so they cannot
 be made to endorse a claim about their own signal.
+
+**And they sign it as a printable text, like the subject.** A wallet refuses
+an opaque blob, for the reason given above, and a witness must be able to read
+what they are confirming:
+
+```
+Iron Chain
+Witness this <noun>
+<schema>
+payload <64 hex chars of payloadHash>
+```
+
+The signature is Ed25519 over the UTF-8 bytes of that text, by the cosigner's
+`key`. The `<noun>` is the profile's word, as for the subject. Until
+1 October 2026 this section said the cosigner signs the 32 raw bytes of
+`payloadHash`; no cosigner signature had been produced yet, so nothing signed
+under the old rule exists.
 
 ## Versions
 

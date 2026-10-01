@@ -76,7 +76,7 @@
           },
           "signature": {
             "$ref": "#/$defs/signature",
-            "description": "Ed25519 signature of the cosigner over payloadHash (the 32 raw bytes)."
+            "description": "Ed25519 signature of the cosigner over the printable text \"Iron Chain\nWitness this <noun>\n<schema>\npayload <payloadHash hex>\" (UTF-8), see spec/leaf.md."
           }
         }
       },
