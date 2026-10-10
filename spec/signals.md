@@ -48,6 +48,10 @@ The images stay with the subject. Only the digests travel, which is what lets
 someone reveal one later — to a single reader, once — without ever having
 published it.
 
+`B` says *someone*. It does not say *who* — nothing binds the person in the
+frame to the key that signs. That gap has a drafted answer (`identity.md`,
+the `P` signal); until it ships, readers should assume `B` is anonymous.
+
 ## `M` — Measured
 
 The numbers came from an instrument the subject already used, not from a form.
