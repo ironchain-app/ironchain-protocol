@@ -91,12 +91,10 @@ With the leaf file alone, and no network:
    their signature against their `key`.
 
 That is the whole test, and it needs neither the issuer nor us.
-[`../schemas/verify_leaf.py`](../schemas/verify_leaf.py) does steps 2 and 3's
-text in 78 lines, without importing a line of the app that wrote the leaf: it
-recomputes `leafHash` and prints the message the wallet displayed. Checking
-the Ed25519 signatures themselves takes any Ed25519 library:
-[`../devnet/anchor.ts`](../devnet/anchor.ts) checks the subject's before it
-anchors a month, and the open verifier will run all four steps.
+[`../schemas/verify_leaf.py`](../schemas/verify_leaf.py) runs all four steps
+on every leaf of a month file, without importing a line of the app that wrote
+it, and exits non-zero if one fails. It never trusts the `leafHash` a file
+announces: it recomputes it, and only compares.
 
 **Cosigners sign `payloadHash`, not `leafHash`.** A witness signs what
 happened, not the record of it — otherwise their signature would have to be

@@ -27,7 +27,7 @@ See [`../spec/profiles.md`](../spec/profiles.md) to write one.
 
 | | |
 |---|---|
-| [`verify_leaf.py`](verify_leaf.py) | Verifies a leaf straight out of a phone, in 78 lines, without importing a line of the app that wrote it: `python verify_leaf.py 2026-09.jsonl` |
+| [`verify_leaf.py`](verify_leaf.py) | Verifies every leaf of a month file straight out of a phone — schema, recomputed hash, the subject's Ed25519 signature, each cosigner's — without importing a line of the app that wrote it. Exits non-zero if any leaf fails: `python verify_leaf.py 2026-09.jsonl` (needs `cryptography` and `jsonschema`) |
 | [`vectors/check_vectors.py`](vectors/check_vectors.py) | Runs every vector against its profile, recomputes the canonical bytes, the hashes and the monthly roots, and checks ten cases that must be **refused**. |
 | [`vectors/make_hours_worked_v1.py`](vectors/make_hours_worked_v1.py) | Regenerates the `hours-worked` vectors from the spec alone — no app code, no library. |
 
