@@ -100,8 +100,13 @@ def subject_text(leaf, lh, noun):
     return f"Iron Chain\nSign this {noun}\n{leaf['schema']}\nleaf {lh}"
 
 
-def witness_text(leaf, noun):
-    return f"Iron Chain\nWitness this {noun}\n{leaf['schema']}\npayload {leaf['payloadHash']}"
+def witness_text(leaf, cosigner, noun):
+    w = leaf["window"]
+    return (f"Iron Chain\nWitness this {noun}\n{leaf['schema']}\n"
+            f"subject {leaf['subject']}\n"
+            f"window {w['start']}-{w['end']}\n"
+            f"role {cosigner['role']}\n"
+            f"payload {leaf['payloadHash']}")
 
 
 def ed25519_ok(key_b58, sig_b58, text):
@@ -161,7 +166,7 @@ def verify(leaf):
         if k in seen:
             failures.append(f"cosigner {k[:8]}: listed twice")
         seen.add(k)
-        if not ed25519_ok(k, c.get("signature", ""), witness_text(leaf, noun)):
+        if not ed25519_ok(k, c.get("signature", ""), witness_text(leaf, c, noun)):
             failures.append(f"cosigner {k[:8]}: invalid signature")
 
     return lh, failures

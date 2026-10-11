@@ -56,6 +56,12 @@ A proof carries the signals it actually has. Nothing more. `D B M C` are
 machines and arithmetic; `W N` are people — and that line is the one worth
 drawing.
 
+The cost column is the cost of fooling a careful issuer: `B M C` travel in
+the leaf the subject signs, and the issuer that anchors it answers for them.
+Until accreditation is its own attestation, a reader counts `N` as `W`.
+Details, and what is cryptographic and what is not, in
+[`spec/signals.md`](spec/signals.md).
+
 `N` is named for the role, never the trade: a coach in a training app, a
 physiotherapist in rehabilitation, an inspector on a site, an investigator in
 a study. Full definitions in [`spec/signals.md`](spec/signals.md).

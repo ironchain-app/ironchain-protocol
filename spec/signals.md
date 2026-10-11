@@ -23,6 +23,15 @@ and one that records evidence serves all three.
 worth drawing: everything above it can be scaled, and everything below it
 costs someone's time and standing.
 
+**Who answers for each signal, in this version.** Only two things in a leaf are
+cryptographic: the subject's signature, and each cosigner's. `B`, `M` and `C`
+are written by the issuer's app into the leaf the subject signs — a modified
+client can write them too. What makes them worth more than `D` is the issuer:
+**an issuer that anchors a leaf vouches for its `B`, `M` and `C`, and must not
+anchor a leaf whose signals it has not checked.** The "cost to fake" column is
+the cost of fooling a careful issuer, not of fooling the format. A reader
+weighs these signals by the issuer whose credential anchored them.
+
 ---
 
 ## `D` — Declared
@@ -67,9 +76,14 @@ is what makes the next hour expensive to invent.
 The measurements hold together — internally, and against this subject's own
 history on this device.
 
-**`C` is computed by the issuer and never claimed by the subject.** It is the
+**`C` is the issuer's judgement, and the issuer answers for it.** It is the
 only signal that is a judgement rather than a fact, and it is the reason the
-issuer exists at all. What "coherent" means is the issuer's business and
+issuer exists at all. In this version it travels inside the leaf the subject
+signs, so the only thing that separates a real `C` from a typed one is the
+credential that anchors the month (see above). A signature of the issuer's own
+over `leafHash` and the signals it attests is planned for the next profile
+version; until then, a reader who needs `C` to be more than the issuer's word
+asks the issuer for its check. What "coherent" means is the issuer's business and
 belongs in their documentation: a heart-rate curve that ramps and recovers, a
 badge-in that matches a commute, a sample weight that matches the vessel. The
 protocol records that the issuer asserted it, not how.
@@ -91,6 +105,12 @@ counterparts, the age of the key, and refusals. **A witness who has declined
 is worth more, not less.** A key that has only ever signed for one person
 counts for almost nothing, and a reader should say so.
 
+That history is **an issuer's policy, not something the protocol publishes.**
+Leaves stay with their subjects and a refusal leaves no record, so a reader
+cannot compute a witness's counterparts from public data alone. Making it
+computable — a monthly root per witness key, over the payloads it signed and
+refused — is open work.
+
 ## `N` — Notarized
 
 A human whose accreditation the **issuer** verified signed, and stakes that
@@ -105,8 +125,15 @@ protocol's name.
 `N` is the strongest signal and the most fragile: it is worth exactly what the
 issuer's verification of accreditation is worth. An issuer who rubber-stamps
 `N` is not producing a strong proof, they are producing a `D` with extra
-steps — and because the accrediting issuer is named on-chain, a reader can
-decline that issuer specifically without declining the signal.
+steps.
+
+**Accreditation is not yet a protocol object.** `role: notarized` is written
+in the leaf by the subject, and any key can sign as a cosigner. The planned
+answer is an accreditation attestation — one SAS attestation per accredited
+cosigner key, under the issuer's credential, with an expiry, revoked by
+closing it. Until it exists, the rule is normative: **a reader reads a
+`notarized` cosigner without a valid accreditation attestation, under a
+credential the reader accepts, at `window.end`, as `W`.**
 
 ---
 

@@ -87,6 +87,32 @@ Given a leaf, its inclusion path and the subject's key:
 
 Four steps, no dependency on the issuer.
 
+## Trust anchor, and what a key compromise does
+
+The four steps above prove that **a** credential attested a root. Which
+credential is worth believing is the reader's decision, and it has to be
+pinned, not discovered:
+
+- **Pin `(cluster, credential, schema)`.** A leaf binds neither a cluster nor
+  an issuer, and a credential's name is not reserved: anyone can create a
+  credential called `IRONCHAIN` under their own authority. The addresses in
+  [`../devnet/deployed.json`](../devnet/deployed.json) are devnet's and prove
+  nothing on mainnet.
+- **An attestation closed before its `expiry` is suspect.** Closing early is
+  possible for the issuer's signer key; a reader who finds the account gone
+  before `periodStart + 6 months` falls back to the creating transaction, not
+  to whatever stands at the address now.
+- **With a receipt, check that the creating transaction is the first one for
+  that address.** A closed attestation's address can be written again; the
+  first write is the one the subject was given.
+
+**If the signer key leaks**, the authority removes it from the credential's
+authorised signers, and the issuer publishes the window during which it was
+exposed: anchors written in that window are re-verified against their
+receipts. **If the authority key leaks**, the credential is lost; the issuer
+creates a new one, publishes it, and readers re-pin. This is why the authority
+key never signs anchors — only the signer does — and why it stays offline.
+
 ## Expiry, and what survives
 
 An attestation expires at `periodStart + 6 months`. The issuer then closes it
@@ -190,6 +216,9 @@ The receipt gains what step 2 and step 4 need:
 What the issuer receives to write an anchor is the leaves' hashes and
 signatures, so that it can refuse an invalid one — never the payload, and
 never the decrypted data the subject matches against it.
+
+`leafCount` counts **distinct** leaves: an anchoring tool removes duplicates by
+`leafHash` before building the tree, and refuses a file that mixes profiles.
 
 ## Versions
 

@@ -104,20 +104,35 @@ be made to endorse a claim about their own signal.
 
 **And they sign it as a printable text, like the subject.** A wallet refuses
 an opaque blob, for the reason given above, and a witness must be able to read
-what they are confirming:
+what they are confirming — **who**, **when**, **in what role**, and what
+happened:
 
 ```
 Iron Chain
 Witness this <noun>
 <schema>
+subject <subject, base58>
+window <window.start>-<window.end>
+role <witness|notarized>
 payload <64 hex chars of payloadHash>
 ```
 
 The signature is Ed25519 over the UTF-8 bytes of that text, by the cosigner's
-`key`. The `<noun>` is the profile's word, as for the subject. Until
-1 October 2026 this section said the cosigner signs the 32 raw bytes of
-`payloadHash`; no cosigner signature had been produced yet, so nothing signed
-under the old rule exists.
+`key`. The `<noun>` is the profile's word, as for the subject; `start` and
+`end` are the leaf's integers, in decimal.
+
+**Why the scene is in the text.** A signature over `payloadHash` alone binds
+the witness to an opaque digest the subject supplied. Anyone who saw one
+countersigned leaf could copy that cosigner entry onto a leaf of their own —
+another subject, another date, `role: notarized` — and every verification step
+would pass. Naming the subject, the window and the role makes the signature
+worthless anywhere else. The witness's app should also recompute
+`payloadHash` from a payload it displays, rather than accept a digest.
+
+History of this rule: until 1 October 2026 the cosigner signed the 32 raw
+bytes of `payloadHash`; until 11 October 2026 the text carried the payload
+only (security review of that date). No cosigner signature had been produced
+under either rule, so nothing signed under them exists.
 
 ## Versions
 
